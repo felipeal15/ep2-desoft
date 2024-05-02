@@ -19,39 +19,39 @@ def foi_derrotado(matriz):
                 return False
     return True
 #TERCEIRA E QUARTA FUNÇÃO BASE OBRIGATÓRIA - NAVIO PODE SER ALOCADO NA POSIÇÃO? , e ALOCANDO OS NAVIOS PARA O COMP.
-def posicao_suporta(m, b, l, c, orient_aloc):
+def posicao_suporta(matriz, b, l, c, orient_aloc):
     if orient_aloc == 'v':
-        if l + b > len(m):
+        if l + b > len(matriz):
             return False
         for i in range(b):
-            if m[l+i][c] != ' ':
+            if matriz[l+i][c] != ' ':
                 return False
     if orient_aloc == 'h':
-        if c + b > len(m):
+        if c + b > len(matriz):
             return False
         for i in range(b):
-            if m[l][c+i] != ' ':
+            if matriz[l][c+i] != ' ':
                 return False
     return True
 
-def aloca_navios(m, l_b):
-    tam = len(m)
+def aloca_navios(matriz, l_b):
+    tam = len(matriz)
     for tam_n in l_b:
         l = random.randint(0, tam-1)
         c = random.randint(0, tam-1)
         orient_aloc = random.choice(['h', 'v'])
-        pode_alocar = posicao_suporta(m, tam_n, l, c, orient_aloc)
+        pode_alocar = posicao_suporta(matriz, tam_n, l, c, orient_aloc)
         while pode_alocar == False:
             l = random.randint(0, tam-1)
             c = random.randint(0, tam-1)
             orient_aloc = random.choice(['h', 'v'])
-            pode_alocar = posicao_suporta(m, tam_n, l, c, orient_aloc)
+            pode_alocar = posicao_suporta(matriz, tam_n, l, c, orient_aloc)
         if orient_aloc == 'v':
             for i in range(l, l+tam_n):
-                m[i][c] = 'N'
+                matriz[i][c] = 'N'
         elif orient_aloc == 'h':
             for j in range(c, c+tam_n):
-                m[l][j] = 'N'
+                matriz[l][j] = 'N'
     return m
 #
 
@@ -100,6 +100,46 @@ def verifica_colisao(tabuleiro, linha, coluna, tamanho_navio, orientacao):
                 return True
 
     return False
+
+
+def ataque_comp(tabuleiro):
+    l_at = random.randit(0, len(tabuleiro)-1)
+    n_at = random.randint(0, len(tabuleiro)-1)
+    if tabuleiro[l_at][n_at] == ' ':
+        print('Água')
+        tabuleiro[l_at][n_at] = 'A'
+        return tabuleiro
+    elif tabuleiroc == 'N':
+        print('No alvo')
+        tabuleiro[l_at][n_at] = 'X'
+        return tabuleiro
+    while tabuleiro[l_at][n_at] == 'X' or tabuleiro[l_at][n_at] == 'A':
+        
+
+
+
+
+def atacar(tabuleiro):
+    x = True
+    l_at = input('Digite a letra correspondente a linha do ataque (ex:C):').upper()
+    if l_at not in ALFABETO or len(l_at) != 1:
+        x = False
+        print('Letra inválida')
+    while x == False:
+        print(l_at)
+    
+    n_at = input('Digite o número correspondente a coluna do ataque (ex:4):')
+    if n_at > 10 or len(l_nt) != 1:
+        x = False
+        print('Número inválido')
+    
+    while x == False:
+        print(l_nt)
+
+
+        
+    
+
 
 def aloca_navios_jogador(tabuleiro, jogador, nacao):
     frota = PAISES[nacao]
