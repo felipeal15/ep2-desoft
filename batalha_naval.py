@@ -38,7 +38,7 @@ def aloca_navios(matriz, l_b):
     tam = len(matriz)
     for tam_n in l_b:
         for i in matriz:
-            print(i)
+            print(i) 
         l = random.randint(0, tam-1)
         c = random.randint(0, tam-1)
         orient_aloc = random.choice(['h', 'v'])
@@ -76,6 +76,7 @@ def escolher_nacao(jogador):
     except ValueError:
         print("Escolha inválida. Por favor, digite um número.")
         return escolher_nacao(jogador)
+    
 
 #CONECTANDO O VALOR DAS FROTAS EM SI, COM O NOME DELAS PREVIAMENTE ESTABELECIDOS 
 #ALÉM DISSO, TESTANDO O FUNCIONAMENTO INCIAL DO JOGO
@@ -123,7 +124,6 @@ def ataque_comp(tabuleiro):
         ataque_comp(tabuleiro)
 
 
-
 def atacar(tabuleiro):
     for i in tabuleiro:
         print(i)
@@ -169,6 +169,8 @@ def aloca_navios_jogador(tabuleiro, jogador, nacao):
     print(f"Jogador {jogador}, aloque seus navios do(a) {nacao} no tabuleiro.")
 
     for tipo_navio, quantidade in frota.items():
+        for i in tabuleiro:
+            print(i)
         tamanho_navio = CONFIGURACAO[tipo_navio]
         print(f"Aloque {quantidade} navio(s) de tipo {tipo_navio} (tamanho {tamanho_navio}):")
 
@@ -221,4 +223,15 @@ nacao = (escolher_nacao(1))
 criar_comp = cria_mapa (10)
 criar_jog = cria_mapa (10)
 #CHAMANDO A FUNCAO DE ALOCAR OS NAVIOS COM OS PARAMETROS
+alocar_comp = aloca_navios (criar_comp, XX)
 alocar = aloca_navios_jogador (criar_jog, 1 , nacao)
+#Chamando as funções de ataque
+while not foi_derrotado(criar_comp) and not foi_derrotado (criar_jog):
+    atacarc = ataque_comp(criar_jog)
+    ataque = atacar(criar_comp)
+if foi_derrotado (criar_comp):
+    print('Voce ganhou tmj!')
+else: 
+    print('Você perdeu tmj!')
+
+
