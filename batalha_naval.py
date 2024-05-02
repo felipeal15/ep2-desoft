@@ -6,9 +6,11 @@ from constantes import *
 
 #PRIMEIRA FUNÇÃO BASE - CRIA MATRIZ QUADRADA DE ESPAÇOS
 def cria_mapa(n):
-  l = [' ']*n
-  matriz=[l]*n
-  return matriz
+    l = []
+    for i in range(n):
+        l.append([' ']*n)
+
+    return l
 #SEGUNDA FUNÇÃO BASE OBRIGATÓRIA - VERIFICA SE ACABOU OS N DA MATRIZ
 def foi_derrotado(matriz):
     for i in matriz:
@@ -54,68 +56,6 @@ def aloca_navios(m, l_b):
 #
 
 #FUNCAO DE ESCOLHA DAS NAÇÕES JUNTAMENTE COM AS FROTAS
-
-CONFIGURACAO = {
-    'destroyer': 3,
-    'porta-avioes': 5,
-    'submarino': 2,
-    'torpedeiro': 3,
-    'cruzador': 2,
-    'couracado': 4
-}
-
-PAISES =  {
-    'Brasil': {
-        'cruzador': 1,
-        'torpedeiro': 2,
-        'destroyer': 1,
-        'couracado': 1,
-        'porta-avioes': 1
-    }, 
-    'França': {
-        'cruzador': 3, 
-        'porta-avioes': 1, 
-        'destroyer': 1, 
-        'submarino': 1, 
-        'couracado': 1
-    },
-    'Austrália': {
-        'couracado': 1,
-        'cruzador': 3, 
-        'submarino': 1,
-        'porta-avioes': 1, 
-        'torpedeiro': 1
-    },
-    'Rússia': {
-        'cruzador': 1,
-        'porta-avioes': 1,
-        'couracado': 2,
-        'destroyer': 1,
-        'submarino': 1
-    },
-    'Japão': {
-        'torpedeiro': 2,
-        'cruzador': 1,
-        'destroyer': 2,
-        'couracado': 1,
-        'submarino': 1
-    }
-}
-#alfabeto
-ALFABETO = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-
-# cores para o terminal
-CORES = {
-    'reset': '\u001b[0m',
-    'red': '\u001b[31m',
-    'black': '\u001b[30m',
-    'green': '\u001b[32m',
-    'yellow': '\u001b[33m',
-    'blue': '\u001b[34m',
-    'magenta': '\u001b[35m',
-    'cyan': '\u001b[36m',
-    'white': '\u001b[37m'
-}
 
 #ESTABELECENDO O VALOR DAS FROTAS PARA CADA NAÇÃO
 
@@ -219,4 +159,3 @@ criar_comp = cria_mapa (10)
 criar_jog = cria_mapa (10)
 #CHAMANDO A FUNCAO DE ALOCAR OS NAVIOS COM OS PARAMETROS
 alocar = aloca_navios_jogador (criar_jog, 1 , nacao)
-
