@@ -113,8 +113,10 @@ def ataque_comp(tabuleiro):
         print('No alvo')
         tabuleiro[l_at][n_at] = 'X'
         return tabuleiro
-    while tabuleiro[l_at][n_at] == 'X' or tabuleiro[l_at][n_at] == 'A':
-        
+    else:
+        return ataque_comp(tabuleiro)
+
+
 
 
 
