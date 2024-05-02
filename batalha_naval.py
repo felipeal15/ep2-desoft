@@ -37,6 +37,8 @@ def posicao_suporta(matriz, b, l, c, orient_aloc):
 def aloca_navios(matriz, l_b):
     tam = len(matriz)
     for tam_n in l_b:
+        for i in matriz:
+            print(i)
         l = random.randint(0, tam-1)
         c = random.randint(0, tam-1)
         orient_aloc = random.choice(['h', 'v'])
@@ -108,41 +110,60 @@ def ataque_comp(tabuleiro):
     if tabuleiro[l_at][n_at] == ' ':
         print('Água')
         tabuleiro[l_at][n_at] = 'A'
+        for i in tabuleiro:
+            print(i)
         return tabuleiro
     elif tabuleiroc == 'N':
         print('No alvo')
         tabuleiro[l_at][n_at] = 'X'
+        for i in tabuleiro:
+            print(i)
         return tabuleiro
     else:
-        return ataque_comp(tabuleiro)
-
-
-
+        ataque_comp(tabuleiro)
 
 
 
 def atacar(tabuleiro):
+    for i in tabuleiro:
+        print(i)
     x = True
     l_at = input('Digite a letra correspondente a linha do ataque (ex:C):').upper()
     if l_at not in ALFABETO or len(l_at) != 1:
         x = False
         print('Letra inválida')
     while x == False:
-        print(l_at)
+        x = True
+        l_at = input('Digite a letra correspondente a linha do ataque (ex:C):').upper()
+        if l_at not in ALFABETO or len(l_at) != 1:
+            x = False
+            print('Letra inválida')
     
     n_at = input('Digite o número correspondente a coluna do ataque (ex:4):')
-    if n_at > 10 or len(l_nt) != 1:
+    if n_at.isdigit() or len(l_nt) != 1 or int(n_at>10):
         x = False
         print('Número inválido')
-    
     while x == False:
-        print(l_nt)
+        x = True
+        n_at = input('Digite o número correspondente a coluna do ataque (ex:4):')
+        if n_at.isdigit() or len(l_nt) != 1 or int(n_at>10):
+            x = False
+            print('Número inválido')
+    
+    if tabuleiro[l_at][n_at] == ' ':
+        print('Água')
+        tabuleiro[l_at][n_at] = 'A'
+        return tabuleiro
+    elif tabuleiroc == 'N':
+        print('No alvo')
+        tabuleiro[l_at][n_at] = 'X'
+        return tabuleiro
+    else:
+        atacar(tabuleiro)
+        print('Ataque inválido')
 
 
         
-    
-
-
 def aloca_navios_jogador(tabuleiro, jogador, nacao):
     frota = PAISES[nacao]
     print(f"Jogador {jogador}, aloque seus navios do(a) {nacao} no tabuleiro.")
