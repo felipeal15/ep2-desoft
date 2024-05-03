@@ -77,7 +77,7 @@ def escolher_nacao(jogador):
         print("Escolha inválida. Por favor, digite um número.")
         return escolher_nacao(jogador)
     
-
+def nacao_comp(comp):
 #CONECTANDO O VALOR DAS FROTAS EM SI, COM O NOME DELAS PREVIAMENTE ESTABELECIDOS 
 #ALÉM DISSO, TESTANDO O FUNCIONAMENTO INCIAL DO JOGO
 
