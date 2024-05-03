@@ -1,7 +1,7 @@
 #import(s)
 import random
 from constantes import *
-
+from copy import deepcopy
 #FUNÇÕES BASE (4)
 
 #PRIMEIRA FUNÇÃO BASE - CRIA MATRIZ QUADRADA DE ESPAÇOS
@@ -77,7 +77,6 @@ def escolher_nacao(jogador):
         print("Escolha inválida. Por favor, digite um número.")
         return escolher_nacao(jogador)
     
-def nacao_comp(comp):
 #CONECTANDO O VALOR DAS FROTAS EM SI, COM O NOME DELAS PREVIAMENTE ESTABELECIDOS 
 #ALÉM DISSO, TESTANDO O FUNCIONAMENTO INCIAL DO JOGO
 
@@ -165,6 +164,7 @@ def atacar(tabuleiro):
 #funcao (tentativa) de fazer com que o computador aloque os navios
 
 def aloca_navios_computador(tabuleiro, nacao):
+    tab = deepcopy(tabuleiro)
     frota = PAISES[nacao]
     for tipo_navio, quantidade in frota.items():
         tamanho_navio = CONFIGURACAO[tipo_navio]
@@ -175,16 +175,16 @@ def aloca_navios_computador(tabuleiro, nacao):
                 orientacao = random.choice(['h', 'v'])  # escolhendo uma orientação aleatória
 
                 # verifica se a posição é válida
-                if verifica_colisao(tabuleiro, linha, coluna, tamanho_navio, orientacao):
+                if verifica_colisao(tab, linha, coluna, tamanho_navio, orientacao):
                     continue
 
                 # Coloca o navio no tabuleiro
                 if orientacao == 'h':
                     for j in range(coluna, coluna + tamanho_navio):
-                        tabuleiro[linha][j] = 'N'
+                        tab[linha][j] = 'N'
                 else:  # orientacao sendo vertical ('v')
                     for i in range(linha, linha + tamanho_navio):
-                        tabuleiro[i][coluna] = 'N'
+                        tab[i][coluna] = 'N'
 
                 break
 
