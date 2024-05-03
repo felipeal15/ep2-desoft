@@ -162,8 +162,33 @@ def atacar(tabuleiro):
         atacar(tabuleiro)
         print('Ataque inválido')
 
+#funcao (tentativa) de fazer com que o computador aloque os navios
 
-        
+def aloca_navios_computador(tabuleiro, nacao):
+    frota = PAISES[nacao]
+    for tipo_navio, quantidade in frota.items():
+        tamanho_navio = CONFIGURACAO[tipo_navio]
+        for _ in range(quantidade):
+            while True:
+                coluna = random.randint(0, 9)  # escolhendo uma coluna aleatória
+                linha = random.randint(0, 9)   # escolhendo uma linha aleatória
+                orientacao = random.choice(['h', 'v'])  # escolhendo uma orientação aleatória
+
+                # verifica se a posição é válida
+                if verifica_colisao(tabuleiro, linha, coluna, tamanho_navio, orientacao):
+                    continue
+
+                # Coloca o navio no tabuleiro
+                if orientacao == 'h':
+                    for j in range(coluna, coluna + tamanho_navio):
+                        tabuleiro[linha][j] = 'N'
+                else:  # orientacao sendo vertical ('v')
+                    for i in range(linha, linha + tamanho_navio):
+                        tabuleiro[i][coluna] = 'N'
+
+                break
+
+#funcao do jogador alocar os navios!
 def aloca_navios_jogador(tabuleiro, jogador, nacao):
     frota = PAISES[nacao]
     print(f"Jogador {jogador}, aloque seus navios do(a) {nacao} no tabuleiro.")
@@ -214,7 +239,10 @@ def aloca_navios_jogador(tabuleiro, jogador, nacao):
                 break
 
     return tabuleiro
-# Agora tente alocar os navios novamente e veja se o problema persiste.
+#para testar a funcao alocar_comp!!!
+#tentando puxar a lista de paises de maneira aleatoria
+paises_disponiveis = list(PAISES.keys())
+nacao_aleatoria = random.choice(paises_disponiveis)
 
 #COMMIT DE TESTE PARA VER SE ESTA FUNCIONANDO
 #JOGO, EFETIVAMENTE
@@ -223,8 +251,8 @@ nacao = (escolher_nacao(1))
 criar_comp = cria_mapa (10)
 criar_jog = cria_mapa (10)
 #CHAMANDO A FUNCAO DE ALOCAR OS NAVIOS COM OS PARAMETROS
-alocar_comp = aloca_navios (criar_comp, XX)
 alocar = aloca_navios_jogador (criar_jog, 1 , nacao)
+alocar_comp = aloca_navios_computador (criar_comp, nacao_aleatoria)
 #Chamando as funções de ataque
 while not foi_derrotado(criar_comp) and not foi_derrotado (criar_jog):
     atacarc = ataque_comp(criar_jog)
